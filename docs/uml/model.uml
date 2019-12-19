@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ocCqYCI5Eeq-8YqLOqYVPg" name="NewModel">
+  <packagedElement xmi:type="uml:Package" xmi:id="_1CRVoCI6Eeq-8YqLOqYVPg" name="dicewars">
+    <packagedElement xmi:type="uml:Package" xmi:id="_6Jcq0CI6Eeq-8YqLOqYVPg" name="ui"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_9tI0ACI6Eeq-8YqLOqYVPg" name="game">
+      <packagedElement xmi:type="uml:Class" xmi:id="_DiGcQCI7Eeq-8YqLOqYVPg" name="Player" visibility="public">
+        <ownedAttribute xmi:id="_f4eb8CI7Eeq-8YqLOqYVPg" name="playersCount" visibility="private" isStatic="true"/>
+        <ownedAttribute xmi:id="_f235cCI7Eeq-8YqLOqYVPg" name="id" visibility="private"/>
+        <ownedAttribute xmi:id="_f6EXYCI7Eeq-8YqLOqYVPg" name="name" visibility="private"/>
+        <ownedAttribute xmi:id="_8CO68CJGEeq-8YqLOqYVPg" name="territories []" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        <ownedOperation xmi:id="_oCpoECI7Eeq-8YqLOqYVPg" name="Player">
+          <ownedParameter xmi:id="_pXMZICI7Eeq-8YqLOqYVPg" name="name"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_t6_UcCI7Eeq-8YqLOqYVPg" name="getId"/>
+        <ownedOperation xmi:id="_uMLLECI7Eeq-8YqLOqYVPg" name="getName"/>
+        <ownedOperation xmi:id="_udVMgCI7Eeq-8YqLOqYVPg" name="setName"/>
+        <ownedOperation xmi:id="_Bu3toCJHEeq-8YqLOqYVPg" name="addTerritory">
+          <ownedParameter xmi:id="_Eg6XcCJHEeq-8YqLOqYVPg" name="territory" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_CBknMCJHEeq-8YqLOqYVPg" name="removeTerritory">
+          <ownedParameter xmi:id="_Kr8WUCJHEeq-8YqLOqYVPg" name="territory" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_CQvroCJHEeq-8YqLOqYVPg" name="getTerritories"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8qAGkCI7Eeq-8YqLOqYVPg" name="Territory" visibility="public">
+        <ownedAttribute xmi:id="_EiS4gCI8Eeq-8YqLOqYVPg" name="dicesCount" visibility="private"/>
+        <ownedAttribute xmi:id="_Ey9xwCI8Eeq-8YqLOqYVPg" name="neightbors []" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_E5vIICI8Eeq-8YqLOqYVPg" name="owner" visibility="private"/>
+        <ownedOperation xmi:id="_o8uOMCI8Eeq-8YqLOqYVPg" name="Territory"/>
+        <ownedOperation xmi:id="_fqKdsCI8Eeq-8YqLOqYVPg" name="getDicesCount"/>
+        <ownedOperation xmi:id="_pRPFoCI8Eeq-8YqLOqYVPg" name="setDicesCount">
+          <ownedParameter xmi:id="_vP_jECI8Eeq-8YqLOqYVPg" name="dicesCount"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_z0wuwCI8Eeq-8YqLOqYVPg" name="getNeightbors"/>
+        <ownedOperation xmi:id="_4B42gCI8Eeq-8YqLOqYVPg" name="addNeigthbor">
+          <ownedParameter xmi:id="_ftoL8CI9Eeq-8YqLOqYVPg" name="newNeightbor" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fq4SkCJAEeq-8YqLOqYVPg" name="Map" visibility="public">
+        <ownedAttribute xmi:id="_j74NsCJAEeq-8YqLOqYVPg" name="Territories []" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_k4W_4CJHEeq-8YqLOqYVPg" name="Tiles []" visibility="private" type="_dcqcoCJCEeq-8YqLOqYVPg"/>
+        <ownedOperation xmi:id="_bIiTUCJBEeq-8YqLOqYVPg" name="Map"/>
+        <ownedOperation xmi:id="_cZiBICJBEeq-8YqLOqYVPg" name="generate" visibility="public">
+          <ownedParameter xmi:id="_fch4ECJBEeq-8YqLOqYVPg" name="playersCount"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_pOVhoCJHEeq-8YqLOqYVPg" name="getTiles"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dcqcoCJCEeq-8YqLOqYVPg" name="Tile" visibility="public">
+        <ownedAttribute xmi:id="_h_BNgCJCEeq-8YqLOqYVPg" name="territory" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_iD3RQCJCEeq-8YqLOqYVPg" name="adjacent [6]" visibility="private" type="_dcqcoCJCEeq-8YqLOqYVPg"/>
+        <ownedOperation xmi:id="_IDUEACJDEeq-8YqLOqYVPg" name="Tile"/>
+        <ownedOperation xmi:id="_13ZQsCJDEeq-8YqLOqYVPg" name="getTerritory"/>
+        <ownedOperation xmi:id="_b4gFwCJDEeq-8YqLOqYVPg" name="setTerritory">
+          <ownedParameter xmi:id="_gE7p8CJDEeq-8YqLOqYVPg" name="territory" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_2d53ECJDEeq-8YqLOqYVPg" name="setAdjacent">
+          <ownedParameter xmi:id="_jLncICJFEeq-8YqLOqYVPg" name="tile" type="_dcqcoCJCEeq-8YqLOqYVPg"/>
+          <ownedParameter xmi:id="_-nydYCJFEeq-8YqLOqYVPg" name="side" type="_UN8GcCJGEeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3Eeu4CJDEeq-8YqLOqYVPg" name="getAdjacent">
+          <ownedParameter xmi:id="_OtwbYCJGEeq-8YqLOqYVPg" name="side" type="_UN8GcCJGEeq-8YqLOqYVPg"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="_UN8GcCJGEeq-8YqLOqYVPg" name="Side" visibility="public">
+        <ownedLiteral xmi:id="_V5u54CJGEeq-8YqLOqYVPg" name="UPLEFT"/>
+        <ownedLiteral xmi:id="_V89NACJGEeq-8YqLOqYVPg" name="UPRIGHT"/>
+        <ownedLiteral xmi:id="_WAGnoCJGEeq-8YqLOqYVPg" name="RIGHT"/>
+        <ownedLiteral xmi:id="_WCmiACJGEeq-8YqLOqYVPg" name="DOWNRIGHT"/>
+        <ownedLiteral xmi:id="_WFVF4CJGEeq-8YqLOqYVPg" name="DOWNLEFT"/>
+        <ownedLiteral xmi:id="_WIGGACJGEeq-8YqLOqYVPg" name="LEFT"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_McobYCJIEeq-8YqLOqYVPg" name="Game" visibility="public">
+        <ownedAttribute xmi:id="_OXLcgCJIEeq-8YqLOqYVPg" name="Players" visibility="private" type="_DiGcQCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_aBS6QCJIEeq-8YqLOqYVPg" name="Map" visibility="private" type="_fq4SkCJAEeq-8YqLOqYVPg"/>
+        <ownedOperation xmi:id="_rZJsACJKEeq-8YqLOqYVPg" name="Game"/>
+        <ownedOperation xmi:id="_HRqD8CJLEeq-8YqLOqYVPg" name="playAction">
+          <ownedParameter xmi:id="_k_7qsCJLEeq-8YqLOqYVPg" name="attacker" type="_8qAGkCI7Eeq-8YqLOqYVPg">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Jzt-wCJQEeq-8YqLOqYVPg" value="1"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_lTEpICJLEeq-8YqLOqYVPg" name="defender" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_QupJgCJQEeq-8YqLOqYVPg" name="getCurrentMap"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
