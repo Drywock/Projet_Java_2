@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ocCqYCI5Eeq-8YqLOqYVPg" name="NewModel">
   <packagedElement xmi:type="uml:Package" xmi:id="_1CRVoCI6Eeq-8YqLOqYVPg" name="dicewars">
-    <packagedElement xmi:type="uml:Package" xmi:id="_6Jcq0CI6Eeq-8YqLOqYVPg" name="ui"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_6Jcq0CI6Eeq-8YqLOqYVPg" name="ui">
+      <packagedElement xmi:type="uml:Class" xmi:id="_9i5-sCKiEeqsrI63jV-R0A" name="TileView" visibility="public">
+        <generalization xmi:id="_dAmBsCKwEeqsrI63jV-R0A" general="_Z4lu8CKwEeqsrI63jV-R0A"/>
+        <ownedAttribute xmi:id="_DSL1sCKjEeqsrI63jV-R0A" name="positionX" visibility="private"/>
+        <ownedAttribute xmi:id="_EcRqQCKjEeqsrI63jV-R0A" name="positionY" visibility="private"/>
+        <ownedAttribute xmi:id="_chT7ICKkEeqsrI63jV-R0A" name="isSelect" visibility="private"/>
+        <ownedOperation xmi:id="_EMAZoCKjEeqsrI63jV-R0A" name="TileView">
+          <ownedParameter xmi:id="_IXyBECKkEeqsrI63jV-R0A" name="Tile" type="_dcqcoCJCEeq-8YqLOqYVPg"/>
+          <ownedParameter xmi:id="_ImtN4CKkEeqsrI63jV-R0A" name="posX"/>
+          <ownedParameter xmi:id="_I0mf8CKkEeqsrI63jV-R0A" name="posY"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_e3BOQCKkEeqsrI63jV-R0A" name="getIsSelected"/>
+        <ownedOperation xmi:id="_fIKBkCKkEeqsrI63jV-R0A" name="setIsSelected">
+          <ownedParameter xmi:id="_jV4mQCKkEeqsrI63jV-R0A" name="isSelected"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Yq5qQCKkEeqsrI63jV-R0A" name="MapView" visibility="public">
+        <generalization xmi:id="_4WcSICKoEeqsrI63jV-R0A" general="_0BrRUCKoEeqsrI63jV-R0A"/>
+        <ownedAttribute xmi:id="_q1w4MCKkEeqsrI63jV-R0A" name="map" visibility="private" type="_fq4SkCJAEeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_q4BiACKkEeqsrI63jV-R0A" name="tileViews []" visibility="private" type="_9i5-sCKiEeqsrI63jV-R0A"/>
+        <ownedOperation xmi:id="_Ee51kCKlEeqsrI63jV-R0A" name="MapView">
+          <ownedParameter xmi:id="_GgqR8CKlEeqsrI63jV-R0A" name="Map"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kemlACKoEeqsrI63jV-R0A" name="MainWindow" visibility="public">
+        <ownedAttribute xmi:id="_tSSywCKpEeqsrI63jV-R0A" name="centralView" visibility="private" type="_0BrRUCKoEeqsrI63jV-R0A"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_oB2CQCKoEeqsrI63jV-R0A" name="MenuView" visibility="public">
+        <generalization xmi:id="_42FbgCKoEeqsrI63jV-R0A" general="_0BrRUCKoEeqsrI63jV-R0A"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_0BrRUCKoEeqsrI63jV-R0A" name="JPanel" visibility="public" isAbstract="true"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Z4lu8CKwEeqsrI63jV-R0A" name="JButton" visibility="public"/>
+    </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_9tI0ACI6Eeq-8YqLOqYVPg" name="game">
       <packagedElement xmi:type="uml:Class" xmi:id="_DiGcQCI7Eeq-8YqLOqYVPg" name="Player" visibility="public">
-        <ownedAttribute xmi:id="_f4eb8CI7Eeq-8YqLOqYVPg" name="playersCount" visibility="private" isStatic="true"/>
         <ownedAttribute xmi:id="_f235cCI7Eeq-8YqLOqYVPg" name="id" visibility="private"/>
         <ownedAttribute xmi:id="_f6EXYCI7Eeq-8YqLOqYVPg" name="name" visibility="private"/>
         <ownedAttribute xmi:id="_8CO68CJGEeq-8YqLOqYVPg" name="territories []" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_3uqsACKeEeqsrI63jV-R0A" name="turnPlayer" visibility="protected" type="_kNTIsCKfEeqsrI63jV-R0A"/>
         <ownedOperation xmi:id="_oCpoECI7Eeq-8YqLOqYVPg" name="Player">
           <ownedParameter xmi:id="_pXMZICI7Eeq-8YqLOqYVPg" name="name"/>
+          <ownedParameter xmi:id="_EShYsCKgEeqsrI63jV-R0A" name="turnPlayer" type="_kNTIsCKfEeqsrI63jV-R0A"/>
         </ownedOperation>
         <ownedOperation xmi:id="_t6_UcCI7Eeq-8YqLOqYVPg" name="getId"/>
         <ownedOperation xmi:id="_uMLLECI7Eeq-8YqLOqYVPg" name="getName"/>
@@ -21,6 +54,11 @@
           <ownedParameter xmi:id="_Kr8WUCJHEeq-8YqLOqYVPg" name="territory" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
         </ownedOperation>
         <ownedOperation xmi:id="_CQvroCJHEeq-8YqLOqYVPg" name="getTerritories"/>
+        <ownedOperation xmi:id="_JDYKgCKeEeqsrI63jV-R0A" name="playTurn"/>
+        <ownedOperation xmi:id="_hrIjYCKeEeqsrI63jV-R0A" name="attack" visibility="protected">
+          <ownedParameter xmi:id="_kS0XUCKeEeqsrI63jV-R0A" name="attacker" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+          <ownedParameter xmi:id="_kkgkQCKeEeqsrI63jV-R0A" name="defender" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_8qAGkCI7Eeq-8YqLOqYVPg" name="Territory" visibility="public">
         <ownedAttribute xmi:id="_EiS4gCI8Eeq-8YqLOqYVPg" name="dicesCount" visibility="private"/>
@@ -35,6 +73,7 @@
         <ownedOperation xmi:id="_4B42gCI8Eeq-8YqLOqYVPg" name="addNeigthbor">
           <ownedParameter xmi:id="_ftoL8CI9Eeq-8YqLOqYVPg" name="newNeightbor" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
         </ownedOperation>
+        <ownedOperation xmi:id="_2gTGUCKcEeqsrI63jV-R0A" name="addDice"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_fq4SkCJAEeq-8YqLOqYVPg" name="Map" visibility="public">
         <ownedAttribute xmi:id="_j74NsCJAEeq-8YqLOqYVPg" name="Territories []" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
@@ -44,6 +83,7 @@
           <ownedParameter xmi:id="_fch4ECJBEeq-8YqLOqYVPg" name="playersCount"/>
         </ownedOperation>
         <ownedOperation xmi:id="_pOVhoCJHEeq-8YqLOqYVPg" name="getTiles"/>
+        <ownedOperation xmi:id="_k-vUECKcEeqsrI63jV-R0A" name="isControlled"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_dcqcoCJCEeq-8YqLOqYVPg" name="Tile" visibility="public">
         <ownedAttribute xmi:id="_h_BNgCJCEeq-8YqLOqYVPg" name="territory" visibility="private" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
@@ -72,6 +112,8 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_McobYCJIEeq-8YqLOqYVPg" name="Game" visibility="public">
         <ownedAttribute xmi:id="_OXLcgCJIEeq-8YqLOqYVPg" name="Players" visibility="private" type="_DiGcQCI7Eeq-8YqLOqYVPg"/>
         <ownedAttribute xmi:id="_aBS6QCJIEeq-8YqLOqYVPg" name="Map" visibility="private" type="_fq4SkCJAEeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_8qQBwCKJEeqsrI63jV-R0A" name="curentPlayer" visibility="private" type="_DiGcQCI7Eeq-8YqLOqYVPg"/>
+        <ownedAttribute xmi:id="_rmuzYCKqEeqsrI63jV-R0A" name="isRunnig"/>
         <ownedOperation xmi:id="_rZJsACJKEeq-8YqLOqYVPg" name="Game"/>
         <ownedOperation xmi:id="_HRqD8CJLEeq-8YqLOqYVPg" name="playAction">
           <ownedParameter xmi:id="_k_7qsCJLEeq-8YqLOqYVPg" name="attacker" type="_8qAGkCI7Eeq-8YqLOqYVPg">
@@ -80,7 +122,51 @@
           <ownedParameter xmi:id="_lTEpICJLEeq-8YqLOqYVPg" name="defender" type="_8qAGkCI7Eeq-8YqLOqYVPg"/>
         </ownedOperation>
         <ownedOperation xmi:id="_QupJgCJQEeq-8YqLOqYVPg" name="getCurrentMap"/>
+        <ownedOperation xmi:id="__RWisCKQEeqsrI63jV-R0A" name="getCurentPlayer"/>
+        <ownedOperation xmi:id="_kg4yECKqEeqsrI63jV-R0A" name="addPlayer">
+          <ownedParameter xmi:id="_mmOt8CKqEeqsrI63jV-R0A" name="player" type="_DiGcQCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_hhH1UCKqEeqsrI63jV-R0A" name="start"/>
+        <ownedOperation xmi:id="_mkG58CKdEeqsrI63jV-R0A" name="goToNextPlayer"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_HHapkCKdEeqsrI63jV-R0A" name="AIPlayer" visibility="public">
+        <ownedAttribute xmi:id="_OM3CQCKdEeqsrI63jV-R0A" name="level" visibility="private" type="_REevoCKdEeqsrI63jV-R0A"/>
+        <ownedOperation xmi:id="_N6RWECKgEeqsrI63jV-R0A" name="AIPlayer">
+          <ownedParameter xmi:id="_PMqyECKgEeqsrI63jV-R0A" name="name"/>
+          <ownedParameter xmi:id="_Pm2zsCKgEeqsrI63jV-R0A" name="level" type="_REevoCKdEeqsrI63jV-R0A"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="_REevoCKdEeqsrI63jV-R0A" name="Level" visibility="public">
+        <ownedLiteral xmi:id="_TdLsYCKdEeqsrI63jV-R0A" name="EASY"/>
+        <ownedLiteral xmi:id="_TfXdsCKdEeqsrI63jV-R0A" name="MEDIUM"/>
+        <ownedLiteral xmi:id="_ThHxMCKdEeqsrI63jV-R0A" name="HARD"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_reJLACKdEeqsrI63jV-R0A" name="RemotePlayer" visibility="public">
+        <ownedAttribute xmi:id="_BJvp4CKgEeqsrI63jV-R0A" name="client" visibility="private"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_kNTIsCKfEeqsrI63jV-R0A" name="TurnPlayer" visibility="public">
+        <ownedOperation xmi:id="_sz4kACKfEeqsrI63jV-R0A" name="playTurn">
+          <ownedParameter xmi:id="_u2OPMCKfEeqsrI63jV-R0A" name="player" type="_DiGcQCI7Eeq-8YqLOqYVPg"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_9I-jICKfEeqsrI63jV-R0A" client="_DiGcQCI7Eeq-8YqLOqYVPg" supplier="_kNTIsCKfEeqsrI63jV-R0A"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_t4MEMCKgEeqsrI63jV-R0A" client="_dcqcoCJCEeq-8YqLOqYVPg" supplier="_UN8GcCJGEeq-8YqLOqYVPg"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_uscLoCKgEeqsrI63jV-R0A" client="_HHapkCKdEeqsrI63jV-R0A" supplier="_REevoCKdEeqsrI63jV-R0A"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_RkOTwCKqEeqsrI63jV-R0A" name="HostedGame" visibility="public">
+        <generalization xmi:id="_YzqV8CKqEeqsrI63jV-R0A" general="_McobYCJIEeq-8YqLOqYVPg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_TpaeoCKqEeqsrI63jV-R0A" name="RemoteGame" visibility="public">
+        <generalization xmi:id="_ZbMQACKqEeqsrI63jV-R0A" general="_McobYCJIEeq-8YqLOqYVPg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MDw64CK1EeqsrI63jV-R0A" name="InputSource" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_KyxGsCKtEeqsrI63jV-R0A" name="main" visibility="public">
+      <ownedAttribute xmi:id="_NH0SgCKtEeqsrI63jV-R0A" name="MainWindow" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NH05kCKtEeqsrI63jV-R0A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NH05kSKtEeqsrI63jV-R0A" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_gvFFoCKwEeqsrI63jV-R0A" name="currentGame"/>
     </packagedElement>
   </packagedElement>
 </uml:Model>
