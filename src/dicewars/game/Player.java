@@ -8,5 +8,4 @@ package dicewars.game;
  *
  */
 public class Player {
-
 }
