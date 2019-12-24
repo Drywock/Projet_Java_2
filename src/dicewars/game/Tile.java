@@ -39,7 +39,7 @@ public class Tile {
 	public void setAdjacent(Tile adjacent , Side side) {
 		this.adjacent = adjacent;
 	}
-	//Testing of the different functions
+	//Testing of the different functions 
 	/*public static void main(String[] args) {
 		Territory t1 = new Territory(1,3,null);
 		Territory t2 = new Territory(2,4,null);
