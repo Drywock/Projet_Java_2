@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author Thomas LINTANF
- *
+ * @version 1.0
  */
 public class Map {
 	private Set<Territory> territories;
@@ -17,12 +17,19 @@ public class Map {
 	
 	/**
 	 * Construct the Map class
+	 * @version 1.0
 	 */
 	public Map() {
 		this.territories = new HashSet<Territory>();
 		this.tiles = new HashSet<Tile>();
 	}
 	
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 * @version 1.0
+	 */
 	private Object pickRandomInSet(Set s) {
 		int rd = new Random().nextInt(s.size());
 		int cpt = 0;
@@ -37,9 +44,10 @@ public class Map {
 	/**
 	 * 
 	 * @param players
+	 * @version 1.0
 	 */
-	public void generete(Player[] players) {
-		final int NBLINES = 50;
+	public void generate(Player[] players) {
+		final int NBCOLUMNS = 50;
 		final int NBROWS = 20;
 		final int NBPLAYERTERRITORIES = 5;
 		final int TERRITORYSIZE = 5;
@@ -49,21 +57,39 @@ public class Map {
 		this.tiles.add(origin);
 		
 		
-		Tile current = origin;
-		
+		Tile firstInRow = origin;
 		for(int i = 0; i < NBROWS; i++) {
-			for(int j = 0; j < NBLINES - i % 2; j++) {
+			Tile current = firstInRow;
+			// Building the row
+			for(int j = 1; j < NBCOLUMNS - i % 2; j++) {
 				Tile newTile = new Tile();
-				current.setAdjacent(newTile, Side.RIGHT);
-				newTile.setAdjacent(current, Side.LEFT);
+				current.setAdjacent(newTile, Tile.Side.RIGHT);
+				newTile.setAdjacent(current, Tile.Side.LEFT);
 				if(i > 0) {
-					newTile.setAdjacent(current.getAdjacent(Side.UPRIGHT), Side.UPLEFT);
-					newTile.setAdjacent(current.getAdjacent(Side.UPRIGHT).getAdjacent(Side.RIGHT),Side.UPRIGHT);
-					newTile.getAdjacent(Side.UPLEFT).setAdjacent(newTile, Side.DOWNRIGHT);
-					newTile.getAdjacent(Side.UPRIGHT).setAdjacent(newTile, Side.DOWNLEFT);
+					newTile.setAdjacent(current.getAdjacent(Tile.Side.UPRIGHT), Tile.Side.UPLEFT);
+					newTile.setAdjacent(current.getAdjacent(Tile.Side.UPRIGHT).getAdjacent(Tile.Side.RIGHT), Tile.Side.UPRIGHT);
+					newTile.getAdjacent(Tile.Side.UPLEFT).setAdjacent(newTile, Tile.Side.DOWNRIGHT);
+					newTile.getAdjacent(Tile.Side.UPRIGHT).setAdjacent(newTile, Tile.Side.DOWNLEFT);
 				}
 				this.tiles.add(newTile);
 				current = newTile;
+			}
+			
+			// Transition to next row
+			if(i < NBROWS - 1) {
+				Tile newTile = new Tile();
+				if( i % 2 == 0)
+				{
+					firstInRow.setAdjacent(newTile, Tile.Side.DOWNLEFT);
+					newTile.setAdjacent(firstInRow, Tile.Side.UPRIGHT);
+				}
+				else {
+					firstInRow.setAdjacent(newTile, Tile.Side.DOWNRIGHT);
+					newTile.setAdjacent(firstInRow, Tile.Side.UPLEFT);
+					firstInRow.getAdjacent(Tile.Side.RIGHT).setAdjacent(newTile, Tile.Side.DOWNLEFT);
+					newTile.setAdjacent(firstInRow.getAdjacent(Tile.Side.RIGHT), Tile.Side.UPRIGHT);
+				}
+				firstInRow = newTile;
 			}
 		}
 		
@@ -80,17 +106,25 @@ public class Map {
 		Set<Tile> available = new HashSet<Tile>();
 		available.add(origin);
 		for(Territory territory : this.territories) {
-			for(int i; i < TERRITORYSIZE; i++) {
-				Tile t = (Tile) this.pickRandomInSet(available);
+			Set<Tile> availableForTerritory = new HashSet<Tile>();
+			for(int i = 0; i < TERRITORYSIZE; i++) {
+				Tile t;
+				if(i == 0)
+					t = (Tile) this.pickRandomInSet(available);
+				else
+					t = (Tile) this.pickRandomInSet(availableForTerritory);
 				t.setTerritory(territory);
 				available.remove(t);
-				available.addAll(t.getEmptyAdjacent())
+				available.addAll(t.getEmptyAdjacents());
+				availableForTerritory.remove(t)
+				availableForTerritory.addAll(t.getEmptyAdjacents());
 			}
 		}
 	}
 
 	/**
 	 * @return the territories
+	 * @version 1.0
 	 */
 	public Set<Territory> getTerritories() {
 		return territories;
@@ -98,9 +132,26 @@ public class Map {
 
 	/**
 	 * @return the tiles
+	 * @version 1.0
 	 */
 	public Set<Tile> getTiles() {
 		return tiles;
 	}
 	
+	/**
+	 * 
+	 * @return true if the entire map territories are owned by the same player
+	 * @version 1.0
+	 */
+	public boolean isControlled() {
+		Player precedent = null;
+		for(Territory current : this.territories) {
+			if(current.getOwner() != precedent)
+				if (precedent != null)
+					return false;
+			precedent = current.getOwner();
+		}
+		
+		return true;
+	}
 }
