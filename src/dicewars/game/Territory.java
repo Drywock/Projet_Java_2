@@ -10,18 +10,13 @@ package dicewars.game;
 public class Territory {
 	
 	//instances 
-	int dicesCount;
-	int owner;
-	Territory neighbours[];
+	private int dicesCount;
+	private int owner;
+	private Territory neighbours[];
 	
 	//constructor
-	public Territory(int owner, int dicesCount, Territory neighbours[]) {
-		this.owner = owner;
-		this.dicesCount = dicesCount;
-		this.neighbours = neighbours;
-		
-		
-	
+	public Territory() {
+					
 }
 
 	public int getDicesCount() {
@@ -29,7 +24,9 @@ public class Territory {
 	}
 
 	public void setDicesCount(int dicesCount) {
-		this.dicesCount = dicesCount;
+		  if(dicesCount > 0 && dicesCount <= 8){
+              this.dicesCount = dicesCount;
+		  }
 	}
 
 	public Territory[] getNeighbours() {
@@ -45,6 +42,8 @@ public class Territory {
 		
 	}
 	public void addDice() {
-		this.dicesCount ++;
+		 if(this.dicesCount < 8){
+             this.dicesCount ++;
+      }
 	}
 }
