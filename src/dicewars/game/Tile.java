@@ -10,13 +10,12 @@ package dicewars.game;
 public class Tile {
 	
 	//Instances
-	Territory territory;
-	Tile adjacent;
+	private Territory territory;
+	private Tile adjacent;
 	
 	//Constructor
-	public Tile(Territory territory, Tile adjacent) {
-		this.adjacent = adjacent;
-		this.territory = territory;
+	public Tile() {
+		
 	}
 
 	public enum Side{
