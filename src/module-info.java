@@ -6,4 +6,5 @@
  *
  */
 module dicewars {
+	requires java.desktop;
 }
