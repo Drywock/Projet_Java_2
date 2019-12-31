@@ -9,7 +9,7 @@ package dicewars.game;
  */
 public class Territory {
 	
-	//instances  
+	//Instances  
 	private int dicesCount;
 	private int owner;
 	private Territory neighbours[];
