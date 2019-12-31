@@ -16,6 +16,7 @@ public class Tile {
 	//Constructor
 	public Tile() {
 		
+		
 	}
 
 	public enum Side{
