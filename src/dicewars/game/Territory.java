@@ -14,7 +14,7 @@ public class Territory {
 	private int owner;
 	private Territory neighbours[];
 	
-	//constructor
+	//Constructor
 	public Territory() {
 					
 }
