@@ -4,11 +4,13 @@
 package dicewars.game;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Camille Vinet, Thomas LINTANF
- * @version 1.1
+ * @version 1.2
  */
 public class Tile {
 	public enum Side{
@@ -69,5 +71,19 @@ public class Tile {
 	 */
 	public void setAdjacent(Side side, Tile tile) {
 		this.adjacents.put(side, tile);
+	}
+
+	/**
+	 * 
+	 * @return The adjacent tiles witch do not belong to a territory
+	 * @version 1.0
+	 */
+	public Set<Tile> getEmptyAdjacents() {
+		Set<Tile> emptyAdjacents = new HashSet<Tile>();
+		for(Tile tile : this.adjacents.values()) {
+			if (tile.getTerritory() == null)
+					emptyAdjacents.add(tile);
+		}
+		return emptyAdjacents;
 	}
 }
