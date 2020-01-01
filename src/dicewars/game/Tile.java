@@ -3,22 +3,14 @@
  */
 package dicewars.game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * @author Thomas LINTANF
- *
+ * @author Camille Vinet, Thomas LINTANF
+ * @version 1.1
  */
 public class Tile {
-	
-	//Instances
-	private Territory territory;
-	private Tile adjacent;
-	
-	//Constructor
-	public Tile() {
-		
-		
-	}
-
 	public enum Side{
 		UPLEFT,
 		UPRIGHT,
@@ -27,35 +19,55 @@ public class Tile {
 		DOWNLEFT,
 		LEFT;
 	}
+	
+	private Territory territory;
+	private Map<Side, Tile> adjacents;
+	
+	/**
+	 * Contructs the class Tile
+	 * @version 1.1
+	 */
+	public Tile() {
+		this.territory = null;
+		this.adjacents = new HashMap<Side, Tile>();
+	}
+
+	/**
+	 * 
+	 * @return The correspondent territory
+	 * @version 1.0
+	 */
 	public Territory getTerritory() {
 		return territory;
 	}
+	
+	/**
+	 * Set the correspondent territory
+	 * @param territory
+	 * @version 1.0
+	 */
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
 	}
-	public Tile getAdjacent(Side side) {
-		return adjacent;
-	}
-	public void setAdjacent(Tile adjacent , Side side) {
-		this.adjacent = adjacent;
-	}
-	//Testing of the different functions 
-	/*public static void main(String[] args) {
-		Territory t1 = new Territory(1,3,null);
-		Territory t2 = new Territory(2,4,null);
-		t1.addNeighbours(t2);
-		Tile Tile1 = new Tile(t1,null);
-		Tile Tile2 = new Tile(t2,Tile1);
-		Tile1.adjacent = Tile2;
-		
-		System.out.println("Owner: "+ t1.owner + "\nDices Count: "+ t1.dicesCount);
-		
-		System.out.println("Owner: "+ Tile1.territory.owner + "\nDices Count: "+ Tile1.territory.dicesCount);
-		
-		Tile1.setTerritory(t2);
-		
-		System.out.println("Owner: "+ Tile1.adjacent.territory.owner + "\nDices Count: "+ Tile1.adjacent.territory.dicesCount);
-	}*/
-	
 
+
+	/**
+	 * 
+	 * @param side
+	 * @return the adjacent Tile on the specified side
+	 * @version 1.1
+	 */
+	public Tile getAdjacent(Side side) {
+		return adjacents.get(side);
+	}
+
+	/**
+	 * Set the adjacent tile on the specified side
+	 * @param side
+	 * @param tile
+	 * @version 1.1
+	 */
+	public void setAdjacent(Side side, Tile tile) {
+		this.adjacents.put(side, tile);
+	}
 }
