@@ -12,8 +12,8 @@ import java.util.Set;
  * @version 1.0
  */
 public class Player {
-	
-	
+
+  
 	private int id;
 	private String name;
 	private Set<Territory> territories;
