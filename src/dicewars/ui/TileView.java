@@ -9,23 +9,21 @@ import dicewars.game.Tile;
 
 /**
  * @author Baptiste MONGAI, Thomas LINTANF
- * @version 1.3
+ * @version 1.4
  */
 public class TileView extends JButton  {
 	
 	
-	private int n=6;
-	private int x[]= new int[n];
-	private int y[]= new int[n];
-	private double angle = 2*Math.PI/n;
-	private Polygon hexagon = null;
+	private final int N= 6;
+	private double angle;
+	private Polygon hexagon;
 	private boolean isSelected;
 	private Tile tile;
 	
     /**
      * Construct the class TileView the Tile t
      * @param t
-     * @version 1.3
+     * @version 1.4
      */
     public TileView(Tile t) {
     	super();
@@ -35,26 +33,26 @@ public class TileView extends JButton  {
     	setContentAreaFilled(false);
     	
     	tile = t;
-    	x = new int[n];
-    	y = new int[n];
-    	angle = 2*Math.PI/n;
+    	angle = 2*Math.PI/N;
     	hexagon = null;
     	isSelected = false;
     }
     
     /**
      * Update the hexagon
-     * @version 1.0
+     * @version 1.1
      */
     private void updateHexagon() {
+    	int [] x = new int[N];
+    	int [] y = new int[N];
         int x0 = getSize().width/2;
         int y0 = getSize().height/2;
-        for(int i=0; i < n; i++) {
+        for(int i=0; i < N; i++) {
             double v = i*angle + Math.PI/2;
             x[i] = x0 + (int)Math.round((getWidth()/2)*Math.cos(v));
             y[i] = y0 + (int)Math.round((getHeight()/2)*Math.sin(v));
         }
-        this.hexagon = new Polygon(x,y,n);
+        this.hexagon = new Polygon(x,y,N);
     }
     
     /**
