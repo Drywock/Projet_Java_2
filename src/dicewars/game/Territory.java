@@ -46,4 +46,13 @@ public class Territory {
              this.dicesCount ++;
       }
 	}
+	public int rollDices(){
+		int total = 0;
+		for(int i = 0; i < dicesCount; i ++) {
+			total += 1 + (int)(Math.random()*6);
+		}
+		return total;
+		
+		
+	}
 }
