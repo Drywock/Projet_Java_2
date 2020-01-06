@@ -52,7 +52,7 @@ public class Game {
 	 * @param defender
 	 * @return true if attack succeed false otherwise
 	 * @throws Exception
-	 * @version 1.0
+	 * @version 1.0	
 	 */
 	public boolean attack(Territory attacker, Territory defender) throws Exception {
 		if(attacker.getOwner() != getCurrentPlayer())
