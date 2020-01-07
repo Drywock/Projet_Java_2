@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author Thomas LINTANF
- * @version 1.1
+ * @version 1.2
  */
 public class Map {
 	private Set<Territory> territories;
@@ -44,7 +44,7 @@ public class Map {
 	/**
 	 * 
 	 * @param players
-	 * @version 1.1
+	 * @version 1.2
 	 */
 	public void generate(Player[] players) {
 		final int NBCOLUMNS = 50;
@@ -118,6 +118,31 @@ public class Map {
 				available.addAll(t.getEmptyAdjacents());
 				availableForTerritory.remove(t);
 				availableForTerritory.addAll(t.getEmptyAdjacents());
+			}
+		}
+		
+		firstInRow = origin;
+		for(int i = 0; i < NBROWS; i ++) {
+			Tile current = firstInRow;
+			for(int j = 1; j < NBCOLUMNS - i % 2; j++) {
+				Territory t = current.getTerritory();
+				Territory t_r = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
+				Territory t_dr = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
+				Territory t_dl = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
+				
+				if(t != t_r) {
+					t.addNeighbor(t_r);
+					t_r.addNeighbor(t);
+				}
+				
+				if(t != t_dr) {
+					t.addNeighbor(t_dr);
+					t_dr.addNeighbor(t);
+				}
+				if(t != t_dl) {
+					t.addNeighbor(t_dl);
+					t_dl.addNeighbor(t);
+				}
 			}
 		}
 	}
