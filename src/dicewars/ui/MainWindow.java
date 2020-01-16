@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * @author Baptiste MONGAI
+ * @author Baptiste MONGAI 
  * @version 1.0
  */
 public class MainWindow extends JFrame{
