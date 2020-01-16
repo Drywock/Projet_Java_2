@@ -1,14 +1,17 @@
 package dicewars.ui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 /**
@@ -51,8 +54,17 @@ public class MainWindow extends JFrame{
 	    back2.setPreferredSize(new Dimension(100,70));
 	    back2.setMinimumSize(new Dimension(100,70));
 	    back2.setMaximumSize(new Dimension(100,70));
+	    //JButton nbBots = new JButton("Choisir le nombre de d'ordi :");
+	    //nbBots.setPreferredSize(new Dimension(300,70));
+	    //nbBots.setMinimumSize(new Dimension(300,70));
+	    //nbBots.setMaximumSize(new Dimension(300,70));
 	    
-	    //Création les panneaux
+	    //Crée un liste déroulante
+	    JComboBox liste1;
+	    Object[] nbJoueurs = new Object[]{"1 ordi", "2 ordi", "3 ordi", "4 ordi", "5 ordi ", "6 ordi", "7 ordi"};
+	    liste1 = new JComboBox(nbJoueurs);
+	    
+		//Création les panneaux
 	    JPanel panel = new JPanel();
 	    JPanel panel2 = new JPanel();
 	    JPanel panel3 = new JPanel();
@@ -61,6 +73,7 @@ public class MainWindow extends JFrame{
 
 	    JPanel panelSolo = new JPanel();
 	    JPanel panelMulti = new JPanel();
+	    
 
 	    
 	    //On définit le layout en lui indiquant qu'il travaillera en ligne
@@ -90,17 +103,27 @@ public class MainWindow extends JFrame{
 	    panel.add(panel3);
 	    
 	    //On positionne maintenant les deux lignes en colonne
-	    panelSolo.setLayout(new BoxLayout(panelSolo, BoxLayout.PAGE_AXIS));
+	    panelSolo.setLayout(new FlowLayout());
+	    panelSolo.add(Box.createRigidArea(new Dimension(0,700)));
 	    panelSolo.add(panel4);
+	    //panelSolo.add(nbBots);
+	    //Crée une zone de texte et pas un bouton
+	    panelSolo.add(new JTextField("Nombre de d'ordi :"));
+	    panelSolo.add(liste1);
+	    
+	    
 
 	    //On positionne maintenant les deux lignes en colonne
 	    panelMulti.setLayout(new BoxLayout(panelMulti, BoxLayout.PAGE_AXIS));
 	    panelMulti.add(panel5);
 	    
+	   
+	    
+	    
 	    frame.setContentPane(panel);
 	    frame.setVisible(true);
 
-	    
+
 	    solo.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	frame.repaint();
