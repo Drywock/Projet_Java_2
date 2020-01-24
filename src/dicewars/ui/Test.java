@@ -3,6 +3,10 @@ package dicewars.ui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +25,12 @@ public class Test extends JPanel {
      * @param file nom du fichier
      */
     public Test(String file) {
-        this.image = getToolkit().getImage(file);
+    	try {
+    		this.image = ImageIO.read(new File(file));
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+        
         
         //On crée les boutons
         JButton quit = new JButton("Quitter");
@@ -68,7 +77,7 @@ public class Test extends JPanel {
      */
     public static void main(String[] args) {
     	
-        Test imagePanel = new Test("C:/Users/BaptisteM/Desktop/Projets/Java-2/FD.png");        
+        Test imagePanel = new Test("./background.png");        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(imagePanel);
