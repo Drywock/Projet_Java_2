@@ -27,11 +27,17 @@ public class Tile {
 	
 	/**
 	 * Contructs the class Tile
-	 * @version 1.1
+	 * @version 1.2
 	 */
 	public Tile() {
 		this.territory = null;
 		this.adjacents = new HashMap<Side, Tile>();
+		this.adjacents.put(Side.UPLEFT, null);
+		this.adjacents.put(Side.UPRIGHT, null);
+		this.adjacents.put(Side.RIGHT, null);
+		this.adjacents.put(Side.LEFT, null);
+		this.adjacents.put(Side.DOWNLEFT, null);
+		this.adjacents.put(Side.DOWNRIGHT, null);
 	}
 
 	/**
@@ -81,8 +87,9 @@ public class Tile {
 	public Set<Tile> getEmptyAdjacents() {
 		Set<Tile> emptyAdjacents = new HashSet<Tile>();
 		for(Tile tile : this.adjacents.values()) {
-			if (tile.getTerritory() == null)
-					emptyAdjacents.add(tile);
+			if (tile != null)
+				if (tile.getTerritory() == null)
+						emptyAdjacents.add(tile);
 		}
 		return emptyAdjacents;
 	}

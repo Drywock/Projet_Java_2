@@ -9,11 +9,12 @@ import java.util.Set;
 
 /**
  * @author Thomas LINTANF
- * @version 1.2
+ * @version 1.3
  */
 public class Map {
 	private Set<Territory> territories;
 	private Set<Tile> tiles;
+	private Tile origin;
 	
 	/**
 	 * Construct the Map class
@@ -31,7 +32,10 @@ public class Map {
 	 * @version 1.0
 	 */
 	private Object pickRandomInSet(Set<?> s) {
-		int rd = new Random().nextInt(s.size());
+		int size = s.size();
+		int rd = 0;
+		if (size != 0)
+			rd = new Random().nextInt(size);
 		int cpt = 0;
 		Object res = null;
 		for(Object o : s) {
@@ -50,10 +54,10 @@ public class Map {
 		final int NBCOLUMNS = 50;
 		final int NBROWS = 20;
 		final int NBPLAYERTERRITORIES = 5;
-		final int TERRITORYSIZE = 5;
+		final int TERRITORYSIZE = 10;
 		
 		// Creation of the Tiles grid
-		Tile origin = new Tile();
+		this.origin = new Tile();
 		this.tiles.add(origin);
 		
 		
@@ -66,10 +70,17 @@ public class Map {
 				current.setAdjacent(Tile.Side.RIGHT, newTile);
 				newTile.setAdjacent(Tile.Side.LEFT, current);
 				if(i > 0) {
-					newTile.setAdjacent(Tile.Side.UPLEFT, current.getAdjacent(Tile.Side.UPRIGHT));
-					newTile.setAdjacent(Tile.Side.UPRIGHT, current.getAdjacent(Tile.Side.UPRIGHT).getAdjacent(Tile.Side.RIGHT));
-					newTile.getAdjacent(Tile.Side.UPLEFT).setAdjacent(Tile.Side.DOWNRIGHT, newTile);
-					newTile.getAdjacent(Tile.Side.UPRIGHT).setAdjacent(Tile.Side.DOWNLEFT, newTile);
+					
+					Tile upLeft = current.getAdjacent(Tile.Side.UPRIGHT);
+					Tile upRight = null;
+					if(upLeft != null)
+						upRight = upLeft.getAdjacent(Tile.Side.RIGHT);
+					newTile.setAdjacent(Tile.Side.UPLEFT, upLeft);
+					newTile.setAdjacent(Tile.Side.UPRIGHT, upRight);
+					if(upLeft != null)
+						upLeft.setAdjacent(Tile.Side.DOWNRIGHT, newTile);
+					if(upRight != null)
+						upRight.setAdjacent(Tile.Side.DOWNLEFT, newTile);
 				}
 				this.tiles.add(newTile);
 				current = newTile;
@@ -111,13 +122,15 @@ public class Map {
 				Tile t;
 				if(i == 0)
 					t = (Tile) this.pickRandomInSet(available);
-				else
+				else 
 					t = (Tile) this.pickRandomInSet(availableForTerritory);
-				t.setTerritory(territory);
-				available.remove(t);
-				available.addAll(t.getEmptyAdjacents());
-				availableForTerritory.remove(t);
-				availableForTerritory.addAll(t.getEmptyAdjacents());
+				if(t != null) {
+					t.setTerritory(territory);
+					available.remove(t);
+					available.addAll(t.getEmptyAdjacents());
+					availableForTerritory.remove(t);
+					availableForTerritory.addAll(t.getEmptyAdjacents());
+				}
 			}
 		}
 		
@@ -127,8 +140,8 @@ public class Map {
 			for(int j = 1; j < NBCOLUMNS - i % 2; j++) {
 				Territory t = current.getTerritory();
 				Territory t_r = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
-				Territory t_dr = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
-				Territory t_dl = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
+				Territory t_dr = current.getAdjacent(Tile.Side.DOWNRIGHT).getTerritory();
+				Territory t_dl = current.getAdjacent(Tile.Side.DOWNLEFT).getTerritory();
 				
 				if(t != t_r) {
 					t.addNeighbor(t_r);
@@ -178,5 +191,13 @@ public class Map {
 		}
 		
 		return true;
+	}
+
+	/**
+	 * @return the orgin
+	 * @version 1.0
+	 */
+	public Tile getOrigin() {
+		return origin;
 	}
 }

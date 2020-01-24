@@ -27,8 +27,7 @@ public class TileView extends JButton  {
      */
     public TileView(Tile t) {
     	super();
-    	Dimension size = getPreferredSize();
-    	size.width = size.height = Math.max(size.width, size.height);
+    	Dimension size = new Dimension(30, 30);
     	setPreferredSize(size);
     	setContentAreaFilled(false);
     	
@@ -36,6 +35,8 @@ public class TileView extends JButton  {
     	angle = 2*Math.PI/N;
     	hexagon = null;
     	isSelected = false;
+    	this.addMouseListener(null);
+    	this.addMouseMotionListener(null);
     }
     
     /**
@@ -59,7 +60,10 @@ public class TileView extends JButton  {
      * @version 1.0
      */
     protected void paintComponent(Graphics g) {
-    	g.setColor(Color.RED);
+    	if(tile.getTerritory() != null)
+    		g.setColor(tile.getTerritory().getOwner().getColor());
+    	else
+    		g.setColor(Color.white);
     	updateHexagon();
         g.fillPolygon(hexagon);
         super.paintComponent(g);
@@ -80,7 +84,10 @@ public class TileView extends JButton  {
      * @version 1.0
      */
     public boolean contains(int x1, int y1) {
-        return hexagon.contains(x1, y1);
+        if(this.hexagon == null)
+        	return false;
+        else
+        	return hexagon.contains(x1,y1);
     }
     
     /**
