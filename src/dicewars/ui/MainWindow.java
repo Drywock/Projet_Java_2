@@ -16,12 +16,15 @@ import javax.swing.JTextField;
 
 
 /**
- * @author Baptiste MONGAI 
- * @version 1.3
+ * @author Baptiste MONGAI, Thomas LINTANF
+ * @version 2.0
  */
 public class MainWindow extends JFrame{
 
-
+	/**
+	 * Contruct the class MainWindow
+	 * @version 2.0
+	 */
 	public MainWindow(){
 		//Création de la frame
 		super("DiceWars");
@@ -113,8 +116,6 @@ public class MainWindow extends JFrame{
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.dispatchEvent(new WindowEvent(MainWindow.this, WindowEvent.WINDOW_CLOSING));
-				MainWindow.this.setContentPane(panelMulti);
-				MainWindow.this.setVisible(true);
 			}
 		});
 		
