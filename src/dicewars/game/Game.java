@@ -3,6 +3,8 @@
  */
 package dicewars.game;
 
+import java.util.HashSet;
+
 /**
  * @author Thomas LINTANF
  * @version 1.0
@@ -40,7 +42,25 @@ public class Game {
 	 * @version 1.0
 	 */
 	public void nextPlayer() {
-		if(this.currentPlayer < this.players.length)
+		Player current = getCurrentPlayer();
+		
+		// Distribue les dès en fin de tour
+		int dicesToAdd = current.getTerritories().size();
+		HashSet<Territory> ts = new HashSet<Territory>(current.getTerritories());
+		for(int i = 0; i < dicesToAdd; i++) {
+			Territory t = (Territory) Map.pickRandomInSet(ts);
+			try {
+				t.addDice();
+			} catch (IllegalArgumentException e) {
+				ts.remove(t);
+				i--;
+			} catch(NullPointerException e) {
+				i = dicesToAdd;
+			}
+		}
+		
+		// Transitione vers le joueur suivant
+		if(this.currentPlayer < this.players.length -1)
 			this.currentPlayer++;
 		else
 			this.currentPlayer = 0;

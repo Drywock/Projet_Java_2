@@ -27,7 +27,8 @@ public class TileView extends JButton  {
      */
     public TileView(Tile t) {
     	super();
-    	Dimension size = new Dimension(30, 30);
+    	
+    	Dimension size = new Dimension(40, 40);
     	setPreferredSize(size);
     	setContentAreaFilled(false);
     	
@@ -59,13 +60,22 @@ public class TileView extends JButton  {
     /**
      * @version 1.0
      */
+    @Override
     protected void paintComponent(Graphics g) {
-    	if(tile.getTerritory() != null)
+    	if(tile.getTerritory() != null) {
     		g.setColor(tile.getTerritory().getOwner().getColor());
+    	}
     	else
     		g.setColor(Color.white);
     	updateHexagon();
         g.fillPolygon(hexagon);
+
+        if(tile.getTerritory() != null) {
+        	g.setColor(Color.black);
+        	int x = (8 * getSize().width) / 20;
+        	int y = (12 * getSize().height) / 20;
+        	g.drawString(String.format("%d", tile.getTerritory().getDicesCount()), x, y);
+        }
         super.paintComponent(g);
     }
     
@@ -73,11 +83,13 @@ public class TileView extends JButton  {
      * @verion 1.0
      */
     protected void paintBorder(Graphics g) {
-        if (this.getModel().isSelected())
-        	g.setColor(Color.white);
-        else
-        	g.setColor(Color.black);
-        g.drawPolygon(hexagon);
+    	if(tile.getTerritory() != null) {
+	        if (this.getModel().isSelected())
+	        	g.setColor(Color.white);
+	        else
+	        	g.setColor(Color.black);
+	        g.drawPolygon(hexagon);
+    	}
     }
      
     /**

@@ -31,7 +31,7 @@ public class Map {
 	 * @return
 	 * @version 1.0
 	 */
-	private Object pickRandomInSet(Set<?> s) {
+	public static Object pickRandomInSet(Set<?> s) {
 		int size = s.size();
 		int rd = 0;
 		if (size != 0)
@@ -51,10 +51,10 @@ public class Map {
 	 * @version 1.2
 	 */
 	public void generate(Player[] players) {
-		final int NBCOLUMNS = 50;
-		final int NBROWS = 20;
+		final int NBCOLUMNS = 35;
+		final int NBROWS = 19;
 		final int NBPLAYERTERRITORIES = 5;
-		final int TERRITORYSIZE = 10;
+		final int TERRITORYSIZE = 15;
 		
 		// Creation of the Tiles grid
 		this.origin = new Tile();
@@ -65,7 +65,7 @@ public class Map {
 		for(int i = 0; i < NBROWS; i++) {
 			Tile current = firstInRow;
 			// Building the row
-			for(int j = 1; j < NBCOLUMNS - i % 2; j++) {
+			for(int j = 1; j < NBCOLUMNS ; j++) {
 				Tile newTile = new Tile();
 				current.setAdjacent(Tile.Side.RIGHT, newTile);
 				newTile.setAdjacent(Tile.Side.LEFT, current);
@@ -121,9 +121,9 @@ public class Map {
 			for(int i = 0; i < TERRITORYSIZE; i++) {
 				Tile t;
 				if(i == 0)
-					t = (Tile) this.pickRandomInSet(available);
+					t = (Tile) Map.pickRandomInSet(available);
 				else 
-					t = (Tile) this.pickRandomInSet(availableForTerritory);
+					t = (Tile) Map.pickRandomInSet(availableForTerritory);
 				if(t != null) {
 					t.setTerritory(territory);
 					available.remove(t);
@@ -143,16 +143,16 @@ public class Map {
 				Territory t_dr = current.getAdjacent(Tile.Side.DOWNRIGHT).getTerritory();
 				Territory t_dl = current.getAdjacent(Tile.Side.DOWNLEFT).getTerritory();
 				
-				if(t != t_r) {
+				if(t != t_r && t_r != null) {
 					t.addNeighbor(t_r);
 					t_r.addNeighbor(t);
 				}
 				
-				if(t != t_dr) {
+				if(t != t_dr && t_dr != null) {
 					t.addNeighbor(t_dr);
 					t_dr.addNeighbor(t);
 				}
-				if(t != t_dl) {
+				if(t != t_dl && t_dl != null) {
 					t.addNeighbor(t_dl);
 					t_dl.addNeighbor(t);
 				}
@@ -191,6 +191,13 @@ public class Map {
 		}
 		
 		return true;
+	}
+	
+	public Player getWinner() {
+		if(isControlled())
+			return ((Territory)territories.toArray()[0]).getOwner();
+		else
+			return null;
 	}
 
 	/**

@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import dicewars.game.Game;
 import dicewars.game.Map;
 import dicewars.game.Player;
+import dicewars.ui.GamePanel;
 import dicewars.ui.MapView;
 
 /**
@@ -33,9 +34,7 @@ public class Main {
 		p[5] = new Player(5, String.format("Player %d", 5), Color.cyan);
 		
 		Game g = new Game(p);
-		Map m = g.getMap();
-		
-		MapView panel = new MapView(m);
+		GamePanel panel = new GamePanel(g);
 		
 		JFrame f = new JFrame();
 		f.setSize(new Dimension(1280,720));

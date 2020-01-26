@@ -5,6 +5,7 @@ package dicewars.ui;
 
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class MapView extends JPanel{
 	private Map map;
 	private Set<TileView> tileViews;
 	
-	public MapView(Map m) {
+	public MapView(Map m, ActionListener al) {
 		super();
 		map = m;
 		tileViews = new HashSet<TileView>();
@@ -41,8 +42,9 @@ public class MapView extends JPanel{
 				TileView tv = new TileView(current);
 				this.add(tv);
 				Dimension size = tv.getPreferredSize();
-				tv.setBounds(( 2 * c + (cpt % 2) )* size.width *1/2 + insets.left, cpt * size.width + insets.top, size.width, size.height);
+				tv.setBounds( (85 * ( 2 * c + (cpt % 2)) * size.width )/200 + insets.left, (75 * cpt * size.width)/100 + insets.top, size.width, size.height);
 				current = current.getAdjacent(Side.RIGHT);
+				tv.addActionListener(al);
 				c++;
 			}
 			if(cpt % 2 == 0)

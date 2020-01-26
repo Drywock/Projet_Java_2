@@ -76,17 +76,19 @@ public class Territory {
 	 */
 	public void addNeighbor(Territory newNeighbour) {
 		this.neighbors.add(newNeighbour);
-		
 	}
 	
 
 	/**
 	 * Set the territory's owner
 	 * @param player
-	 * @version 1.0
+	 * @version 1.1
 	 */
 	public void setOwner(Player player) {
+		if(this.owner != null)
+			this.owner.removeTerritory(this);
 		this.owner = player;
+		player.addTerritories(this);
 	}
 
 	/**
