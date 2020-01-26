@@ -82,7 +82,7 @@ public class Game {
 		else if(attacker.getOwner() == defender.getOwner())
 			throw new Exception();
 		else {
-			if (attacker.rollDices() > defender.rollDices()) {
+			if (attacker.rollDices(false) > defender.rollDices(true)) {
 				defender.setOwner(getCurrentPlayer());
 				defender.setDicesCount(attacker.getDicesCount() - 1);
 				attacker.setDicesCount(1);

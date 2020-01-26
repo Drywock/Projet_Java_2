@@ -99,6 +99,7 @@ public class Territory {
 	public Player getOwner() {
 		return owner;
 	}
+	
 	public int rollDices(boolean isDef){
 		int total = 0;
 		int nbDices = dicesCount;
