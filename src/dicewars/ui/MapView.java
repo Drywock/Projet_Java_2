@@ -19,10 +19,12 @@ import dicewars.game.Tile.Side;
  * @author Thomas LINTANF
  *
  */
+@SuppressWarnings("serial")
 public class MapView extends JPanel{
 	
 	
 	private Map map;
+	@SuppressWarnings("unused")
 	private Set<TileView> tileViews;
 	
 	public MapView(Map m, ActionListener al) {

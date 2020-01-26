@@ -3,9 +3,7 @@
  */
 package dicewars.ui;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +22,7 @@ import dicewars.game.Tile;
  * @author Thomas LINTANF
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 	
 	private Game game;
@@ -36,7 +35,7 @@ public class GamePanel extends JPanel {
 		this.game = game;
 		this.attackingT = null;
 		this.defendingT = null;
-		this.currentPlayerBox = new CurrentPlayerBox(game.getCurrentPlayer().getColor());
+		this.currentPlayerBox = new CurrentPlayerBox(game.getCurrentPlayer());
 		
 		MapView m = new MapView(game.getMap(), new SelectionListener());
 		JButton attack = new JButton("Attaquer !");
@@ -89,8 +88,8 @@ public class GamePanel extends JPanel {
 				JDialog dial = new JDialog();
 				dial.setLayout(new FlowLayout());
 				dial.setModal(true);
-				dial.add(new JLabel("Le gagant est le joueur : "));
-				dial.add(new CurrentPlayerBox(game.getCurrentPlayer().getColor()));
+				String str = String.format("Le gagant est le joueur : %d", game.getCurrentPlayer().getId() + 1);
+				dial.add(new JLabel(str));
 				dial.setVisible(true);
 			}
 
@@ -105,7 +104,7 @@ public class GamePanel extends JPanel {
 			game.nextPlayer();
 			attackingT = null;
 			defendingT = null;
-			currentPlayerBox.setColor(game.getCurrentPlayer().getColor());
+			currentPlayerBox.setPlayer(game.getCurrentPlayer());
 			GamePanel.this.repaint();
 			GamePanel.this.revalidate();
 		}

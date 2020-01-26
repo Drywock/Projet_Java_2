@@ -15,6 +15,7 @@ import javax.swing.JPanel;
  * @author Thomas LINTANF
  *
  */
+@SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
 	private Image image;
 	

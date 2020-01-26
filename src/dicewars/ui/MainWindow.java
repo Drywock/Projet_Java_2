@@ -26,6 +26,8 @@ import dicewars.game.Player;
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame{
 
+	private Player[] allPlayer;
+	private JComboBox<String> liste2;
 	/**
 	 * Contruct the class MainWindow
 	 * @version 2.0
@@ -49,7 +51,7 @@ public class MainWindow extends JFrame{
 
 
 		//Crée un liste déroulante
-		final int NB_MAX_PLAYER = 8;
+		final int NB_MAX_PLAYER = 6;
 		
 		String[] optOrdi = new String[NB_MAX_PLAYER - 1];
 		for (int i = 1;i < NB_MAX_PLAYER; i++)
@@ -59,7 +61,7 @@ public class MainWindow extends JFrame{
 		String[] optJoueurs = new String[NB_MAX_PLAYER-1];
 		for (int i = 2;i <= NB_MAX_PLAYER; i++)
 			optJoueurs[i-2] = String.format("%d joueurs",i);
-		JComboBox<String> liste2 = new JComboBox<String>(optJoueurs);
+		this.liste2 = new JComboBox<String>(optJoueurs);
 
 
 		//Création les panneaux
@@ -120,19 +122,18 @@ public class MainWindow extends JFrame{
 		
 		
 		
-		Player[] p = new Player[6];
+		this.allPlayer = new Player[6];
 		
-		p[0] = new Player(0, String.format("Player %d", 0), Color.red);
-		p[1] = new Player(1, String.format("Player %d", 1), Color.blue);
-		p[2] = new Player(2, String.format("Player %d", 2), Color.yellow);
-		p[3] = new Player(3, String.format("Player %d", 3), Color.green);
-		p[4] = new Player(4, String.format("Player %d", 4), Color.magenta);
-		p[5] = new Player(5, String.format("Player %d", 5), Color.cyan);
+		allPlayer[0] = new Player(0, String.format("Player %d", 0), Color.red);
+		allPlayer[1] = new Player(1, String.format("Player %d", 1), Color.blue);
+		allPlayer[2] = new Player(2, String.format("Player %d", 2), Color.yellow);
+		allPlayer[3] = new Player(3, String.format("Player %d", 3), Color.green);
+		allPlayer[4] = new Player(4, String.format("Player %d", 4), Color.magenta);
+		allPlayer[5] = new Player(5, String.format("Player %d", 5), Color.cyan);
 		
-		Game g = new Game(p);
-		GamePanel gamePanel = new GamePanel(g);
 		
-		playMulti.addActionListener(new SwitchPanelActionListener(gamePanel));
+		
+		playMulti.addActionListener(new StartGameActionListener());
 		
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -159,6 +160,26 @@ public class MainWindow extends JFrame{
 			MainWindow.this.revalidate();;
 		}
 		
+	}
+	
+	public class StartGameActionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			String value = (String) liste2.getSelectedItem();
+			String s[] = value.split(" ");
+			int nbJoueurs = Integer.parseInt(s[0]);
+			
+			Player[] p = new Player[nbJoueurs];
+			for(int i =0; i < nbJoueurs; i++)
+				p[i] = allPlayer[i];
+				
+			Game g = new Game(p);
+			GamePanel gamePanel = new GamePanel(g);
+			
+			MainWindow.this.setContentPane(gamePanel);
+			MainWindow.this.repaint();
+			MainWindow.this.revalidate();;
+		}
 	}
 
 }

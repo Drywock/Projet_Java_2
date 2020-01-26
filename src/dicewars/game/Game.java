@@ -22,10 +22,27 @@ public class Game {
 	 * @version 1.0
 	 */
 	public Game(Player players[]) {
+		final int STARTING_DICES = 10;
+		
 		this.players = players;
 		this.currentPlayer = 0;
 		this.map = new Map();
 		this.map.generate(this.players);
+		
+		for(Player p : this.players) {
+			HashSet<Territory> ts = new HashSet<Territory>(p.getTerritories());
+			for(int i = 0; i < STARTING_DICES; i++) {
+				Territory t = (Territory) Map.pickRandomInSet(ts);
+				try {
+					t.addDice();
+				} catch(IllegalArgumentException e) {
+					i--;
+					ts.remove(t);
+				}
+				if(ts.isEmpty())
+					i = STARTING_DICES;
+			}
+		}
 	}
 	
 	/**

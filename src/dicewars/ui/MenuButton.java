@@ -12,6 +12,7 @@ import javax.swing.JButton;
  * @author Thomas LINTANF
  *
  */
+@SuppressWarnings("serial")
 public class MenuButton extends JButton {
 	
 	public MenuButton(String label) {

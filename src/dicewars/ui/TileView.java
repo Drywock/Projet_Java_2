@@ -11,6 +11,7 @@ import dicewars.game.Tile;
  * @author Baptiste MONGAI, Thomas LINTANF
  * @version 1.4
  */
+@SuppressWarnings("serial")
 public class TileView extends JButton  {
 	
 	
