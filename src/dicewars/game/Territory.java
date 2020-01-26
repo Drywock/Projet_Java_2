@@ -99,9 +99,13 @@ public class Territory {
 	public Player getOwner() {
 		return owner;
 	}
-	public int rollDices(){
+	public int rollDices(boolean isDef){
 		int total = 0;
-		for(int i = 0; i < dicesCount; i ++) {
+		int nbDices = dicesCount;
+		if(!isDef)
+			nbDices--;
+		
+		for(int i = 0; i < nbDices; i ++) {
 			total += 1 + (int)(Math.random()*6);
 		}
 		return total;
