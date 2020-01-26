@@ -66,7 +66,7 @@ public class GamePanel extends JPanel {
 			if(game.getCurrentPlayer() == ter.getOwner()) {
 				attackingT = ter;
 			} else if(attackingT != null) {
-				//if( attackingT.getNeighbors().contains(ter))
+				if( attackingT.getNeighbors().contains(ter))
 					defendingT = ter;
 			}
 			

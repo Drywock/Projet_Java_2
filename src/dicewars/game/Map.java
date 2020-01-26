@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import dicewars.game.Tile.Side;
+
 /**
  * @author Thomas LINTANF
  * @version 1.3
@@ -139,23 +141,44 @@ public class Map {
 			Tile current = firstInRow;
 			for(int j = 1; j < NBCOLUMNS - i % 2; j++) {
 				Territory t = current.getTerritory();
-				Territory t_r = current.getAdjacent(Tile.Side.RIGHT).getTerritory();
-				Territory t_dr = current.getAdjacent(Tile.Side.DOWNRIGHT).getTerritory();
-				Territory t_dl = current.getAdjacent(Tile.Side.DOWNLEFT).getTerritory();
-				
-				if(t != t_r && t_r != null) {
-					t.addNeighbor(t_r);
-					t_r.addNeighbor(t);
+				if(t != null) {
+					Territory t_r = null;
+					Tile tl_r = current.getAdjacent(Side.RIGHT);
+					if(tl_r != null)
+						t_r = tl_r.getTerritory();
+					
+					Territory t_dr = null; 
+					Tile tl_dr = current.getAdjacent(Side.DOWNRIGHT);
+					if(tl_dr != null)
+						t_dr = tl_dr.getTerritory();
+					
+					Territory t_dl =null; 
+					Tile tl_dl = current.getAdjacent(Side.DOWNLEFT);
+					if(tl_dl != null)
+							t_dl = tl_dl.getTerritory();
+					
+					if(t != t_r && t_r != null) {
+						t.addNeighbor(t_r);
+						t_r.addNeighbor(t);
+					}
+					
+					if(t != t_dr && t_dr != null) {
+						t.addNeighbor(t_dr);
+						t_dr.addNeighbor(t);
+					}
+					if(t != t_dl && t_dl != null) {
+						t.addNeighbor(t_dl);
+						t_dl.addNeighbor(t);
+					}
 				}
-				
-				if(t != t_dr && t_dr != null) {
-					t.addNeighbor(t_dr);
-					t_dr.addNeighbor(t);
-				}
-				if(t != t_dl && t_dl != null) {
-					t.addNeighbor(t_dl);
-					t_dl.addNeighbor(t);
-				}
+				current = current.getAdjacent(Side.RIGHT);
+			}
+			
+			if(i % 2 == 0) {
+				firstInRow = firstInRow.getAdjacent(Side.DOWNLEFT);
+			} 
+			else {
+				firstInRow = firstInRow.getAdjacent(Side.DOWNRIGHT);
 			}
 		}
 	}
