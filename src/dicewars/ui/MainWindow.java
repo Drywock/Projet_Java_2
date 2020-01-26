@@ -1,5 +1,6 @@
 package dicewars.ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -14,11 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dicewars.game.Game;
+import dicewars.game.Player;
+
 
 /**
  * @author Baptiste MONGAI, Thomas LINTANF
  * @version 2.0
  */
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame{
 
 	/**
@@ -28,7 +33,7 @@ public class MainWindow extends JFrame{
 	public MainWindow(){
 		//Création de la frame
 		super("DiceWars");
-		this.setSize(1920, 1200);
+		this.setSize(1282, 720);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
@@ -39,8 +44,8 @@ public class MainWindow extends JFrame{
 		JButton solo = new MenuButton("Solo");
 		JButton back = new MenuButton("Retour");
 		JButton back2 = new MenuButton("Retour");
-		JButton play = new MenuButton("Jouer");
-		JButton play2 = new MenuButton("Jouer");
+		JButton playSolo = new MenuButton("Jouer");
+		JButton playMulti = new MenuButton("Jouer");
 
 
 		//Crée un liste déroulante
@@ -75,7 +80,7 @@ public class MainWindow extends JFrame{
 
 		//On positionne maintenant les deux lignes en colonne
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(0,300)));
+		panel.add(Box.createRigidArea(new Dimension(0,250)));
 		panel.add(solo);
 		panel.add(Box.createRigidArea(new Dimension(0,50)));
 		panel.add(multi);
@@ -91,7 +96,7 @@ public class MainWindow extends JFrame{
 		panelSolo.add(new JLabel("Nombre de d'ordi :"));
 
 		panelSolo.add(liste1);
-		panelSolo.add(play);
+		panelSolo.add(playSolo);
 
 		//On positionne maintenant les boutons et la zone de texte avec un FlowLayout
 		panelMulti.setLayout(new FlowLayout());
@@ -102,7 +107,7 @@ public class MainWindow extends JFrame{
 		panelMulti.add(new JTextField("Nombre de joueurs :"));
 
 		panelMulti.add(liste2);
-		panelMulti.add(play2);
+		panelMulti.add(playMulti);
 
 		ActionListener goBackListener = new SwitchPanelActionListener(panel);
 		ActionListener goToSoloListener = new SwitchPanelActionListener(panelSolo);
@@ -112,7 +117,23 @@ public class MainWindow extends JFrame{
 		back.addActionListener(goBackListener);
 		multi.addActionListener(goToMultiListener);
 		back2.addActionListener(goBackListener);
-
+		
+		
+		
+		Player[] p = new Player[6];
+		
+		p[0] = new Player(0, String.format("Player %d", 0), Color.red);
+		p[1] = new Player(1, String.format("Player %d", 1), Color.blue);
+		p[2] = new Player(2, String.format("Player %d", 2), Color.yellow);
+		p[3] = new Player(3, String.format("Player %d", 3), Color.green);
+		p[4] = new Player(4, String.format("Player %d", 4), Color.magenta);
+		p[5] = new Player(5, String.format("Player %d", 5), Color.cyan);
+		
+		Game g = new Game(p);
+		GamePanel gamePanel = new GamePanel(g);
+		
+		playMulti.addActionListener(new SwitchPanelActionListener(gamePanel));
+		
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.dispatchEvent(new WindowEvent(MainWindow.this, WindowEvent.WINDOW_CLOSING));
